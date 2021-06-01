@@ -1,0 +1,25 @@
+keytool -genkeypair -alias springboot.demo.com -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore server.p12 -validity 3650
+
+password -> changeit
+
+What is your first and last name?
+  [Unknown]:  springboot.demo.com
+What is the name of your organizational unit?
+  [Unknown]:  Test
+What is the name of your organization?
+  [Unknown]:  Test
+What is the name of your City or Locality?
+  [Unknown]:  Bangkok
+What is the name of your State or Province?
+  [Unknown]:  Bangkok
+What is the two-letter country code for this unit?
+  [Unknown]:  TH
+Is CN=springboot.demo.com, OU=Test, O=Test, L=Bangkok, ST=Bangkok, C=TH correct?
+  [no]:  yes
+  
+  
+keytool -certreq -alias springboot.demo.com -keystore server.p12 -storepass changeit -file server.csr
+keytool -gencert -alias springboot.demo.com -keystore server.p12 -storepass changeit -infile server.csr -outfile server-der.crt
+keytool -gencert -alias springboot.demo.com -keystore server.p12 -storepass changeit -infile server.csr -rfc -outfile server-pem.crt
+
+  

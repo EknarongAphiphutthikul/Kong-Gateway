@@ -21,3 +21,13 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+RestApi/RestApiDemoHttp/mvnw
+RestApi/RestApiDemoHttp/mvnw.cmd
+RestApi/RestApiDemoHttp/.mvn/wrapper/maven-wrapper.jar
+RestApi/RestApiDemoHttp/.mvn/wrapper/maven-wrapper.properties
+RestApi/RestApiDemoHttp/.mvn/wrapper/MavenWrapperDownloader.java
+RestApi/RestApiDemoHttps/mvnw
+RestApi/RestApiDemoHttps/mvnw.cmd
+RestApi/RestApiDemoHttps/.mvn/wrapper/maven-wrapper.jar
+RestApi/RestApiDemoHttps/.mvn/wrapper/maven-wrapper.properties
+RestApi/RestApiDemoHttps/.mvn/wrapper/MavenWrapperDownloader.java
