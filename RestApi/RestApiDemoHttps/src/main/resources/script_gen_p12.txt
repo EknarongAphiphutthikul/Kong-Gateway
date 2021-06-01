@@ -1,3 +1,5 @@
+----------------------------------------------------- Generate by keytool --------------------------------------------------------
+
 keytool -genkeypair -alias springboot.demo.com -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore server.p12 -validity 3650
 
 password -> changeit
@@ -22,4 +24,16 @@ keytool -certreq -alias springboot.demo.com -keystore server.p12 -storepass chan
 keytool -gencert -alias springboot.demo.com -keystore server.p12 -storepass changeit -infile server.csr -outfile server-der.crt
 keytool -gencert -alias springboot.demo.com -keystore server.p12 -storepass changeit -infile server.csr -rfc -outfile server-pem.crt
 
+----------------------------------------------------------- END -------------------------------------------------------------------
+
+
+---------------------------------------------------- Generate By OpenSSL ----------------------------------------------------------
+
+#openssl req -x509 -newkey rsa:2048 -keyout serverapikeyencrypt.pem -out serverapicrt-pem.crt -days 365
+#openssl pkey -in serverapikeyencrypt.pem -out serverapikey.pem
+openssl req -x509 -nodes -newkey rsa:2048 -keyout serverapikey.pem -out serverapicrt-pem.crt -days 365
+#openssl x509 -outform der -in serverapicrt-pem.crt -out serverapicrt-der.crt
+openssl pkcs12 -export -out server.p12 -inkey serverapikey.pem -in serverapicrt-pem.crt -name springboot.demo.com
+
+----------------------------------------------------------- END -------------------------------------------------------------------
   
