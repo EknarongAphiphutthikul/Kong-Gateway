@@ -31,3 +31,8 @@ RestApi/RestApiDemoHttps/mvnw.cmd
 RestApi/RestApiDemoHttps/.mvn/wrapper/maven-wrapper.jar
 RestApi/RestApiDemoHttps/.mvn/wrapper/maven-wrapper.properties
 RestApi/RestApiDemoHttps/.mvn/wrapper/MavenWrapperDownloader.java
+RestApi/ClientRestApiDemo/mvnw
+RestApi/ClientRestApiDemo/mvnw.cmd
+RestApi/ClientRestApiDemo/.mvn/wrapper/maven-wrapper.jar
+RestApi/ClientRestApiDemo/.mvn/wrapper/maven-wrapper.properties
+RestApi/ClientRestApiDemo/.mvn/wrapper/MavenWrapperDownloader.java
