@@ -1,12 +1,12 @@
-http://restapi.demo.com:9500/v1/get
-http://restapi.demo.com:9500/v1/post
+http://restapi.demo.com:9500/demo-http/v1/get
+http://restapi.demo.com:9500/demo-http/v1/post
 
-http://restapi.demo.com:9500/v2/get
-http://restapi.demo.com:9500/v2/post
+http://restapi.demo.com:9500/demo-http/v2/get
+http://restapi.demo.com:9500/demo-http/v2/post
 
 
-https://springboot.demo.com:9600/v1/get
-https://springboot.demo.com:9600/v1/post
+https://springboot.demo.com:9600/demo-https/v1/get
+https://springboot.demo.com:9600/demo-https/v1/post
 
-https://springboot.demo.com:9600/v2/get
-https://springboot.demo.com:9600/v2/post
+https://springboot.demo.com:9600/demo-https/v2/get
+https://springboot.demo.com:9600/demo-https/v2/post
