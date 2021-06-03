@@ -16,6 +16,7 @@ services:
       KONG_PG_PASSWORD: kongpw
       KONG_PG_DATABASE: kong-database
       KONG_CASSANDRA_CONTACT_POINTS: postgres.dev.demo
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
