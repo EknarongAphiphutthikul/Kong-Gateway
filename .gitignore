@@ -36,3 +36,4 @@ RestApi/ClientRestApiDemo/mvnw.cmd
 RestApi/ClientRestApiDemo/.mvn/wrapper/maven-wrapper.jar
 RestApi/ClientRestApiDemo/.mvn/wrapper/maven-wrapper.properties
 RestApi/ClientRestApiDemo/.mvn/wrapper/MavenWrapperDownloader.java
+Kong/shard_drive/*
