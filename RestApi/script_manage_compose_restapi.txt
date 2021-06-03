@@ -1,0 +1,14 @@
+***************** Create **********************
+docker network create kong_default
+docker-compose -f restapi-demo-docker-compose.yaml up -d
+
+
+***************** Delete **********************
+docker-compose -f restapi-demo-docker-compose.yaml rm -f
+docker network rm kong_default
+
+***************** Start **********************
+docker-compose -f restapi-demo-docker-compose.yaml start
+
+***************** Stop **********************
+docker-compose -f restapi-demo-docker-compose.yaml stop
