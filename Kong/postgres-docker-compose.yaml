@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  postgres:
+    hostname: postgres.dev.demo
+    container_name: postgres
+    image: postgres:13.1
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: kongusr
+      POSTGRES_PASSWORD: kongpw
+      POSTGRES_DB: kong-database
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - D:\My_Work\Git\Kong-Gateway\Kong\shard_drive\postgres:/var/lib/postgresql/data
+    networks:
+      - kong_default
+    # extra_hosts:
+    #   - "postgres.dev.demo :127.0.0.1"
+networks:
+  kong_default:
+    external: true
