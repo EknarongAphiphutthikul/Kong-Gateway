@@ -5,3 +5,11 @@ docker-compose -f postgres-docker-compose.yaml up -d
 docker run --rm  --net kong_default -e "KONG_DATABASE=postgres" -e "KONG_PG_HOST=postgres.dev.demo" -e "KONG_PG_DATABASE=kong-database" -e "KONG_PG_USER=kongusr" -e "KONG_PG_PASSWORD=kongpw" -e "KONG_CASSANDRA_CONTACT_POINTS=postgres.dev.demo" kong:2.4.1-alpine kong migrations bootstrap
 
 docker-compose -f kong-docker-compose.yaml up -d
+
+docker-compose -f konga-docker-compose.yaml up -d
+
+----------------------------------------------- -------------- NOTE ----------------------------------------------------------
+# docker run --rm  --net kong_default pantsel/konga:next -c prepare -a postgres -u postgresql://kongusr:kongpw@postgres.dev.demo:5432/konga
+# konga prepare db not work! error  --> "Failed to prepare database: error: column r.consrc does not exist"
+
+docker run -d -p 1337:1337 --net kong_default --net-alias konga.dev.demo --name konga  pantsel/konga:next

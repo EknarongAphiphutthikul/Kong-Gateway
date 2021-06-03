@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  konga:
+    hostname: konga.dev.demo
+    container_name: konga
+    image: pantsel/konga:next
+    ports: 
+      - "1337:1337"
+    networks:
+      - kong_default
+networks:
+  kong_default:
+    external: true
