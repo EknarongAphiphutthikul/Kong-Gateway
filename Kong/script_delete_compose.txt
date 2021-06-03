@@ -1,0 +1,4 @@
+docker-compose -f konga-docker-compose.yaml rm -f
+docker-compose -f kong-docker-compose.yaml rm -f
+docker-compose -f postgres-docker-compose.yaml rm -f
+docker network rm kong_default

@@ -1,0 +1,3 @@
+docker-compose -f konga-docker-compose.yaml stop
+docker-compose -f kong-docker-compose.yaml stop
+docker-compose -f postgres-docker-compose.yaml stop
