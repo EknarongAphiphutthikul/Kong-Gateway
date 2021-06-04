@@ -1,9 +1,10 @@
 package th.eknarongap.kong.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,12 +19,12 @@ public class Controller {
 	private RestTemplateUtil restTemplateUtil;
 
 	@PostMapping("example/rest/api")
-	public @ResponseBody CommonModel postMethod(@RequestBody ExampleModel req, HttpHeaders header) throws Exception {
+	public @ResponseBody CommonModel postMethod(@RequestBody ExampleModel req, @RequestHeader MultiValueMap<String, String> headers) throws Exception {
 		String message = null;
 		if ("GET".equals(req.getMethod())) {
-			message = restTemplateUtil.get(req.getUrl(), header, String.class);
+			message = restTemplateUtil.get(req.getUrl(), headers, String.class);
 		} else if ("POST".equals(req.getMethod())) {
-			CommonModel resp = restTemplateUtil.post(req.getUrl(), CommonModel.builder().msg(req.getMsg()).build(), header, CommonModel.class);
+			CommonModel resp = restTemplateUtil.post(req.getUrl(), CommonModel.builder().msg(req.getMsg()).build(), headers, CommonModel.class);
 			message = resp.getMsg();
 		} else {
 			message = "method invalid.";

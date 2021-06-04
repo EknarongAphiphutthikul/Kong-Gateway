@@ -31,6 +31,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import th.eknarongap.kong.demo.config.TrustStoreConfigBean;
@@ -85,13 +86,13 @@ public class RestTemplateUtil {
 		}
 	}
 
-	public <T> T get(String url, HttpHeaders header, Class<T> responseClass) throws Exception {
-		HttpEntity<Object> requestEntity = new HttpEntity<>(header);
+	public <T> T get(String url, MultiValueMap<String, String> headers, Class<T> responseClass) throws Exception {
+		HttpEntity<Object> requestEntity = new HttpEntity<>(headers);
 		return restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseClass).getBody();
 	}
 
-	public <T> T post(String url, Object request, HttpHeaders header, Class<T> responseClass) throws Exception {
-		HttpEntity<Object> requestEntity = new HttpEntity<>(request, header);
+	public <T> T post(String url, Object request, MultiValueMap<String, String> headers, Class<T> responseClass) throws Exception {
+		HttpEntity<Object> requestEntity = new HttpEntity<>(request, headers);
 		return restTemplate.exchange(url, HttpMethod.POST, requestEntity, responseClass).getBody();
 	}
 
