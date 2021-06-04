@@ -18,5 +18,6 @@ public class CommonModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -5935397136143902634L;
 	private String msg;
+	private String header;
 
 }
