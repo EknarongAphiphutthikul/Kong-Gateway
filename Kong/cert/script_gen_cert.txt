@@ -1,0 +1,26 @@
+openssl req -x509 -nodes -newkey rsa:2048 -keyout kongkey.pem -out kongcrt-pem.crt -days 3650
+
+    Country Name (2 letter code) [AU]:TH
+    State or Province Name (full name) [Some-State]:Bangkok
+    Locality Name (eg, city) []:Bangkok
+    Organization Name (eg, company) [Internet Widgits Pty Ltd]:Test
+    Organizational Unit Name (eg, section) []:Test
+    Common Name (e.g. server FQDN or YOUR name) []:kong.dev.demo
+    Email Address []:
+
+openssl req -new -key kongkey.pem -out request.csr
+
+    Country Name (2 letter code) [AU]:TH
+    State or Province Name (full name) [Some-State]:Bangkok
+    Locality Name (eg, city) []:Bangkok
+    Organization Name (eg, company) [Internet Widgits Pty Ltd]:Test
+    Organizational Unit Name (eg, section) []:Test
+    Common Name (e.g. server FQDN or YOUR name) []:kong.dev.demo
+    Email Address []:
+
+    Please enter the following 'extra' attributes
+    to be sent with your certificate request     
+    A challenge password []:
+    An optional company name []:
+
+openssl x509 -signkey kongkey.pem -in request.csr -req -days 365 -out client.crt
