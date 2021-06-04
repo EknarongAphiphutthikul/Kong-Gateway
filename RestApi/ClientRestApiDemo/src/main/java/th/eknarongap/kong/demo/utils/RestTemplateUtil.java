@@ -26,6 +26,7 @@ import org.cryptacular.io.FileResource;
 import org.cryptacular.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -84,12 +85,13 @@ public class RestTemplateUtil {
 		}
 	}
 
-	public <T> T get(String url, Class<T> responseClass) throws Exception {
-		return restTemplate.getForObject(url, responseClass);
+	public <T> T get(String url, HttpHeaders header, Class<T> responseClass) throws Exception {
+		HttpEntity<Object> requestEntity = new HttpEntity<>(header);
+		return restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseClass).getBody();
 	}
 
-	public <T> T post(String url, Object request, Class<T> responseClass) throws Exception {
-		HttpEntity<Object> requestEntity = new HttpEntity<>(request);
+	public <T> T post(String url, Object request, HttpHeaders header, Class<T> responseClass) throws Exception {
+		HttpEntity<Object> requestEntity = new HttpEntity<>(request, header);
 		return restTemplate.exchange(url, HttpMethod.POST, requestEntity, responseClass).getBody();
 	}
 

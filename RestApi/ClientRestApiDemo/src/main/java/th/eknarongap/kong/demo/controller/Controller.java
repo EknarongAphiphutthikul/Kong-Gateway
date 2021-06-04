@@ -1,6 +1,7 @@
 package th.eknarongap.kong.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,12 +18,12 @@ public class Controller {
 	private RestTemplateUtil restTemplateUtil;
 
 	@PostMapping("example/rest/api")
-	public @ResponseBody CommonModel postMethod(@RequestBody ExampleModel req) throws Exception {
+	public @ResponseBody CommonModel postMethod(@RequestBody ExampleModel req, HttpHeaders header) throws Exception {
 		String message = null;
 		if ("GET".equals(req.getMethod())) {
-			message = restTemplateUtil.get(req.getUrl(), String.class);
+			message = restTemplateUtil.get(req.getUrl(), header, String.class);
 		} else if ("POST".equals(req.getMethod())) {
-			CommonModel resp = restTemplateUtil.post(req.getUrl(), CommonModel.builder().msg(req.getMsg()).build(), CommonModel.class);
+			CommonModel resp = restTemplateUtil.post(req.getUrl(), CommonModel.builder().msg(req.getMsg()).build(), header, CommonModel.class);
 			message = resp.getMsg();
 		} else {
 			message = "method invalid.";
