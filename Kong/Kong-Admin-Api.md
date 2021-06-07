@@ -68,7 +68,7 @@
     --data "healthchecks.active.unhealthy.http_failures=3" \
     --data "healthchecks.active.unhealthy.interval=5"
 
-    > curl -X POST http://kong.dev.demo:8001/(certificateid)/upstreams \
+    > curl -X POST http://kong.dev.demo:8001/certificates/(certificate id)/upstreams \
     --data "name=springboot-https-upstreams" \
     --data "algorithm=round-robin" \
     --data "slots=1000" \
@@ -81,7 +81,9 @@
     --data "healthchecks.active.type=https" \
     --data "healthchecks.active.unhealthy.tcp_failures=3" \
     --data "healthchecks.active.unhealthy.http_failures=3" \
-    --data "healthchecks.active.unhealthy.interval=5"
+    --data "healthchecks.active.unhealthy.interval=5" \
+    --data "healthchecks.active.https_sni=springboot.demo.com" \
+    --data "client_certificate=client_certificate.id=(certificate id)"
 - create target
     > curl -X POST http://kong.dev.demo:8001/(upstream id)/targets \
     --data "target=restapi.demo.com:9500" \
