@@ -1,19 +1,43 @@
 version: '3.7'
 services:
-  rest_api_http:
+  rest_api_http1:
     hostname: restapi.demo.com
-    container_name: rest_api_http
+    container_name: rest_api_http1
     image: localhost:2375/kong-demo/rest-api-demo-http:1.0
     ports: 
       - "9500:9500"
+    environment:
+      APP_NAME: http1
     networks:
       - kong_default
-  rest_api_https:
+  rest_api_http2:
+    hostname: restapi.demo.com
+    container_name: rest_api_http2
+    image: localhost:2375/kong-demo/rest-api-demo-http:1.0
+    ports: 
+      - "9501:9500"
+    environment:
+      APP_NAME: http2
+    networks:
+      - kong_default
+  rest_api_https1:
     hostname: springboot.demo.com
-    container_name: rest_api_https
+    container_name: rest_api_https1
     image: localhost:2375/kong-demo/rest-api-demo-https:1.0
     ports: 
       - "9600:9600"
+    environment:
+      APP_NAME: https1
+    networks:
+      - kong_default
+  rest_api_https2:
+    hostname: springboot.demo.com
+    container_name: rest_api_https2
+    image: localhost:2375/kong-demo/rest-api-demo-https:1.0
+    ports: 
+      - "9601:9600"
+    environment:
+      APP_NAME: https2
     networks:
       - kong_default
 networks:
