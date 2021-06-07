@@ -64,7 +64,6 @@
     --data "healthchecks.active.http_path=/demo-http/actuator/health" \
     --data "healthchecks.active.https_verify_certificate=false" \
     --data "healthchecks.active.type=http" \
-    --data "healthchecks.active.unhealthy.tcp_failures=3" \
     --data "healthchecks.active.unhealthy.http_failures=3" \
     --data "healthchecks.active.unhealthy.interval=5"
 
@@ -79,22 +78,21 @@
     --data "healthchecks.active.http_path=/demo-https/actuator/health" \
     --data "healthchecks.active.https_verify_certificate=true" \
     --data "healthchecks.active.type=https" \
-    --data "healthchecks.active.unhealthy.tcp_failures=3" \
     --data "healthchecks.active.unhealthy.http_failures=3" \
     --data "healthchecks.active.unhealthy.interval=5" \
     --data "healthchecks.active.https_sni=springboot.demo.com" \
     --data "client_certificate=client_certificate.id=(certificate id)"
 - create target
-    > curl -X POST http://kong.dev.demo:8001/(upstream id)/targets \
+    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
     --data "target=restapi.demo.com:9500" \
     --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/(upstream id)/targets \
+    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
     --data "target=restapi.demo.com:9501" \
     --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/(upstream id)/targets \
+    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
     --data "target=springboot.demo.com:9600" \
     --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/(upstream id)/targets \
+    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
     --data "target=springboot.demo.com:9601" \
     --data "weight=50"
 - create Service
@@ -102,6 +100,12 @@
     --data "name=springboot-http-service-upstream" \
     --data "host=springboot-http-upstreams" \
     --data "path=/demo-http"
+
+    > curl -X POST http://kong.dev.demo:8001/services/ \
+    --data "name=springboot-https-service-upstream" \
+    --data "host=springboot-https-upstreams" \
+    --data "path=/demo-https"
+
 - create Route
     > curl -X POST http://kong.dev.demo:8001/services/springboot-http-service-upstream/routes/ \
     --data "name=http-v1-http-upstream" \
@@ -117,4 +121,17 @@
     --data "strip_path=false" \
     --data "path_handling=v0"
 
+    > curl -X POST http://kong.dev.demo:8001/services/springboot-https-service-upstream/routes/ \
+    --data "name=http-v1-https-upstream" \
+    --data "paths[]=/v1/" \
+    --data "protocols[]=https" \
+    --data "strip_path=false" \
+    --data "path_handling=v0"
+
+    > curl -X POST http://kong.dev.demo:8001/services/springboot-https-service-upstream/routes/ \
+    --data "name=http-v2-https-upstream" \
+    --data "paths[]=/v2/" \
+    --data "protocols[]=https" \
+    --data "strip_path=false" \
+    --data "path_handling=v0"
 
