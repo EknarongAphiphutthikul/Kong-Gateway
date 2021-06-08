@@ -91,12 +91,15 @@
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-http-upstreams/targets \
     --data "target=restapi1.demo.com:9500" \
     --data "weight=100"
+
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-http-upstreams/targets \
     --data "target=restapi2.demo.com:9500" \
     --data "weight=100"
+
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
     --data "target=springboot1.demo.com:9600" \
     --data "weight=100"
+    
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
     --data "target=springboot2.demo.com:9600" \
     --data "weight=100"
