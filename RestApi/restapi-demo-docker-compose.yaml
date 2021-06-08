@@ -4,8 +4,8 @@ services:
     hostname: restapi1.demo.com
     container_name: rest_api_http1
     image: localhost:2375/kong-demo/rest-api-demo-http:1.0
-    ports: 
-      - "9501:9500"
+    # ports: 
+    #   - "9501:9500"
     environment:
       APP_NAME: http1
     networks:
@@ -14,8 +14,8 @@ services:
     hostname: restapi2.demo.com
     container_name: rest_api_http2
     image: localhost:2375/kong-demo/rest-api-demo-http:1.0
-    ports: 
-      - "9502:9500"
+    # ports: 
+    #   - "9502:9500"
     environment:
       APP_NAME: http2
     networks:
@@ -24,8 +24,8 @@ services:
     hostname: springboot1.demo.com
     container_name: rest_api_https1
     image: localhost:2375/kong-demo/rest-api-demo-https:1.0
-    ports: 
-      - "9601:9600"
+    # ports: 
+    #   - "9601:9600"
     environment:
       APP_NAME: https1
       KEY_ALIAS: springboot1.demo.com
@@ -35,8 +35,8 @@ services:
     hostname: springboot2.demo.com
     container_name: rest_api_https2
     image: localhost:2375/kong-demo/rest-api-demo-https:1.0
-    ports: 
-      - "9602:9600"
+    # ports: 
+    #   - "9602:9600"
     environment:
       APP_NAME: https2
       KEY_ALIAS: springboot2.demo.com
