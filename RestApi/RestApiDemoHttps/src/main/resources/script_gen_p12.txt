@@ -45,7 +45,29 @@ openssl req -x509 -nodes -newkey rsa:2048 -keyout serverapikey.pem -out serverap
 #openssl x509 -outform der -in serverapicrt-pem.crt -out serverapicrt-der.crt
 openssl pkcs12 -export -out server.p12 -inkey serverapikey.pem -in serverapicrt-pem.crt -name springboot.demo.com
 
+----------------------------------------------------------- END -------------------------------------------------------------------
+
+---------------------------------------------------- Generate By CA ---------------------------------------------------------------
+
+openssl req -new -x509 -keyout demo-com-ca.key -out demo-com-ca.crt -days 9999 -subj '/CN=demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH' -passin pass:changeit -passout pass:changeit
+
+openssl req -x509 -nodes -newkey rsa:2048 -keyout springboot1-demo-com-key.pem -out springboot1-demo-com-pem.crt -days 3650 -subj '/CN=springboot1.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
+openssl req -x509 -nodes -newkey rsa:2048 -keyout springboot2-demo-com-key.pem -out springboot2-demo-com-pem.crt -days 3650 -subj '/CN=springboot2.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
+openssl req -new -key springboot1-demo-com-key.pem -out springboot1-demo-com-pem.csr -subj '/CN=springboot1.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
+openssl req -new -key springboot2-demo-com-key.pem -out springboot2-demo-com-pem.csr -subj '/CN=springboot2.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
+openssl x509 -req -CA demo-com-ca.crt -CAkey demo-com-ca.key -in springboot1-demo-com-pem.csr -out springboot1-demo-com-pem-ca.crt -days 3650 -CAcreateserial -passin pass:changeit
+openssl x509 -req -CA demo-com-ca.crt -CAkey demo-com-ca.key -in springboot2-demo-com-pem.csr -out springboot2-demo-com-pem-ca.crt -days 3650 -CAcreateserial -passin pass:changeit
+
 openssl pkcs12 -export -out server1.p12 -inkey springboot1-demo-com-key.pem -in springboot1-demo-com-pem.crt -name springboot1.demo.com
 openssl pkcs12 -export -out server2.p12 -inkey springboot2-demo-com-key.pem -in springboot2-demo-com-pem.crt -name springboot2.demo.com
+
+keytool -importkeystore -srckeystore server1.p12 -destkeystore server.p12 -srcstoretype PKCS12 -deststoretype PKCS12 -srcstorepass changeit -deststorepass changeit -v
+keytool -importkeystore -srckeystore server2.p12 -destkeystore server.p12 -srcstoretype PKCS12 -deststoretype PKCS12 -srcstorepass changeit -deststorepass changeit -v
+
+keytool -keystore server.p12 -alias CARoot -import -file demo-com-ca.crt -storepass changeit -keypass changeit
+keytool -keystore server.p12 -alias springboot1.demo.com -import -file springboot1-demo-com-pem-ca.crt -storepass changeit -keypass changeit
+keytool -keystore server.p12 -alias springboot2.demo.com -import -file springboot2-demo-com-pem-ca.crt -storepass changeit -keypass changeit
+
+keytool -keystore client.truststore.jks -storetype PKCS12 -alias CARoot -import -file demo-com-ca.crt -storepass changeit -keypass changeit
+
 ----------------------------------------------------------- END -------------------------------------------------------------------
-  
