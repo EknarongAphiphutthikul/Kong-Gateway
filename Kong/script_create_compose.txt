@@ -13,3 +13,6 @@ docker-compose -f konga-docker-compose.yaml up -d
 # konga prepare db not work! error  --> "Failed to prepare database: error: column r.consrc does not exist"
 
 docker run -d -p 1337:1337 --net kong_default --net-alias konga.dev.demo --name konga  pantsel/konga:next
+
+
+docker run -it --net kong_default --name ubuntu_debug_net_kong ubuntu:20.04
