@@ -45,5 +45,7 @@ openssl req -x509 -nodes -newkey rsa:2048 -keyout serverapikey.pem -out serverap
 #openssl x509 -outform der -in serverapicrt-pem.crt -out serverapicrt-der.crt
 openssl pkcs12 -export -out server.p12 -inkey serverapikey.pem -in serverapicrt-pem.crt -name springboot.demo.com
 
+openssl pkcs12 -export -out server1.p12 -inkey springboot1-demo-com-key.pem -in springboot1-demo-com-pem.crt -name springboot1.demo.com
+openssl pkcs12 -export -out server2.p12 -inkey springboot2-demo-com-key.pem -in springboot2-demo-com-pem.crt -name springboot2.demo.com
 ----------------------------------------------------------- END -------------------------------------------------------------------
   
