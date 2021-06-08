@@ -82,19 +82,21 @@
     --data "healthchecks.active.unhealthy.interval=5" \
     --data "healthchecks.active.https_sni=springboot.demo.com" \
     --data "client_certificate=client_certificate.id=(certificate id)"
+    
 - create target
-    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
-    --data "target=restapi.demo.com:9500" \
-    --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
-    --data "target=restapi.demo.com:9501" \
-    --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
-    --data "target=springboot.demo.com:9600" \
-    --data "weight=50"
-    > curl -X POST http://kong.dev.demo:8001/upstreams/(upstream id)/targets \
-    --data "target=springboot.demo.com:9601" \
-    --data "weight=50"
+    > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-http-upstreams/targets \
+    --data "target=restapi1.demo.com:9500" \
+    --data "weight=100"
+    > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-http-upstreams/targets \
+    --data "target=restapi2.demo.com:9500" \
+    --data "weight=100"
+    > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
+    --data "target=springboot1.demo.com:9600" \
+    --data "weight=100"
+    > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
+    --data "target=springboot2.demo.com:9600" \
+    --data "weight=100"
+
 - create Service
     > curl -X POST http://kong.dev.demo:8001/services/ \
     --data "name=springboot-http-service-upstream" \
