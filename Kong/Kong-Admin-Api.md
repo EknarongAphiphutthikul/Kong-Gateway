@@ -12,6 +12,14 @@
 - Delete Certificates
     > curl -X DELETE --url http://kong.dev.demo:8001/certificates/(certificateid)
 
+### CA Certificates
+- List CA Certificates
+    > curl -X GET --url http://kong.dev.demo:8001/ca_certificates
+
+### SNIs
+- List SNIs
+    > curl -X GET --url http://kong.dev.demo:8001/snis
+
 ### Service
 - List Service
     > curl -X GET --url http://kong.dev.demo:8001/services
@@ -99,7 +107,7 @@
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
     --data "target=springboot1.demo.com:9600" \
     --data "weight=100"
-    
+
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-https-upstreams/targets \
     --data "target=springboot2.demo.com:9600" \
     --data "weight=100"
