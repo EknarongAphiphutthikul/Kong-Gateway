@@ -20,11 +20,11 @@ services:
       # KONG_ADMIN_SSL_CERT:
       # KONG_ADMIN_SSL_CERT_KEY: 
       # KONG_DB_CACHE_TTL: 5
-      KONG_SSL_CERT: /usr/local/kong/ssl/kongcrt-pem.crt
-      KONG_SSL_CERT_KEY: /usr/local/kong/ssl/kongkey.pem
+      # KONG_SSL_CERT: /usr/local/kong/ssl/kongcrt-pem.crt
+      # KONG_SSL_CERT_KEY: /usr/local/kong/ssl/kongkey.pem
       # KONG_CLIENT_SSL: true
-      KONG_CLIENT_SSL_CERT: /usr/local/kong/ssl/demo-com-ca.crt
-      KONG_CLIENT_SSL_CERT_KEY: /usr/local/kong/ssl/demo-com-ca.key
+      # KONG_CLIENT_SSL_CERT: /usr/local/kong/ssl/demo-com-ca.crt
+      # KONG_CLIENT_SSL_CERT_KEY: /usr/local/kong/ssl/demo-com-ca.key
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
