@@ -70,6 +70,8 @@ keytool -keystore server.p12 -alias springboot2.demo.com -import -file springboo
 
 keytool -keystore client.truststore.jks -storetype PKCS12 -alias CARoot -import -file demo-com-ca.crt -storepass changeit -keypass changeit
 
+openssl pkey -in demo-com-ca.key -out demo-com-ca-plaintext.key
+
 ----------------------------------------------------------- END -------------------------------------------------------------------
 
 ----------------------------------------------------------- NOTE ------------------------------------------------------------------

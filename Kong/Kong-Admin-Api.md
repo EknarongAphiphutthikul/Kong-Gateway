@@ -70,6 +70,19 @@
     > curl -X DELETE --url http://kong.dev.demo:8001/upstreams/(upstream id)/targets/(target name or id)
 
 ### Create Loadbalancing
+- Create Certificates
+    > curl -X POST --url http://kong.dev.demo:8001/certificates \
+    -H 'Content-Type: multipart/form-data' \
+    -F snis[]=springboot-https-upstreams \
+    -F cert=@./RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.crt \
+    -F key=@./RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca-plaintext.key
+
+     > curl -X POST --url http://kong.dev.demo:8001/certificates \
+    -H 'Content-Type: multipart/form-data' \
+    -F snis[]=kong.dev.demo \
+    -F cert=@./Kong/cert/kongcrt-pem.crt \
+    -F key=@./Kong/cert/kongkey.pem
+
 - create upstreams
     > curl -X POST http://kong.dev.demo:8001/upstreams \
     --data "name=springboot-http-upstreams" \
@@ -87,7 +100,7 @@
     --data "healthchecks.active.unhealthy.interval=5" \
     --data "healthchecks.active.unhealthy.timeouts=2"
 
-    <!-- > curl -X POST http://kong.dev.demo:8001/upstreams \
+     > curl -X POST http://kong.dev.demo:8001/upstreams \
     --data "name=springboot-https-upstreams" \
     --data "algorithm=round-robin" \
     --data "slots=1000" \
@@ -101,9 +114,9 @@
     --data "healthchecks.active.type=https" \
     --data "healthchecks.active.unhealthy.http_failures=3" \
     --data "healthchecks.active.unhealthy.interval=5" \
-    --data "healthchecks.active.unhealthy.timeouts=2" -->
+    --data "healthchecks.active.unhealthy.timeouts=2"
 
-    > curl -X POST http://kong.dev.demo:8001/certificates/(certificate id)/upstreams \
+    <!-- > curl -X POST http://kong.dev.demo:8001/certificates/(certificate id)/upstreams \
     --data "name=springboot-https-upstreams" \
     --data "algorithm=round-robin" \
     --data "slots=1000" \
@@ -119,7 +132,7 @@
     --data "healthchecks.active.unhealthy.interval=5" \
     --data "healthchecks.active.unhealthy.timeouts=2" \
     --data "healthchecks.active.https_sni=springboot.demo.com" \
-    --data "client_certificate=client_certificate.id=(certificate id)"
+    --data "client_certificate=client_certificate.id=(certificate id)" -->
 
 - create target
     > curl -X POST http://kong.dev.demo:8001/upstreams/springboot-http-upstreams/targets \
@@ -141,13 +154,17 @@
 - create Service
     > curl -X POST http://kong.dev.demo:8001/services/ \
     --data "name=springboot-http-service-upstream" \
+    --data 'protocol=http' \
     --data "host=springboot-http-upstreams" \
+     --data 'port=9500' \
     --data "path=/demo-http"
 
-    > curl -X POST http://kong.dev.demo:8001/services/ \
+    > curl -X POST http://kong.dev.demo:8001/certificates/(certificateid)/services/ \
     --data "name=springboot-https-service-upstream" \
+    --data 'protocol=https' \
     --data "host=springboot-https-upstreams" \
-    --data "path=/demo-https"
+     --data 'port=9600' \
+    --data "path=/demo-https" 
 
 - create Route
     > curl -X POST http://kong.dev.demo:8001/services/springboot-http-service-upstream/routes/ \
