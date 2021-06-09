@@ -15,10 +15,20 @@
 ### CA Certificates
 - List CA Certificates
     > curl -X GET --url http://kong.dev.demo:8001/ca_certificates
-
+- Create CA Certificates
+    > curl -X POST --url http://kong.dev.demo:8001/ca_certificates \
+    -H 'Content-Type: multipart/form-data' \
+    -F cert=@./RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.crt
+- Delete CA Certificates
+    > curl -X DELETE --url http://kong.dev.demo:8001/ca_certificates/(ca certificate id)
 ### SNIs
 - List SNIs
     > curl -X GET --url http://kong.dev.demo:8001/snis
+- Create SNIs
+   > curl -X POST --url http://kong.dev.demo:8001/certificates/(certificate id)/snis \
+    --data 'name=*.demo.com'
+- Delete SNIs
+   > curl -X DELETE --url http://kong.dev.demo:8001/snis/(sni id)
 
 ### Service
 - List Service
