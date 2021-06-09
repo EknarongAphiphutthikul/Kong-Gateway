@@ -59,3 +59,4 @@ RestApi/RestApiDemoHttps/src/main/resources/springboot2-demo-com-key.pem
 RestApi/RestApiDemoHttps/src/main/resources/springboot2-demo-com-pem.crt
 RestApi/RestApiDemoHttps/src/main/resources/springboot2-demo-com-pem.csr
 RestApi/RestApiDemoHttps/src/main/resources/springboot2-demo-com-pem-ca.crt
+RestApi/ClientRestApiDemo/src/main/resources/truststore.jks
