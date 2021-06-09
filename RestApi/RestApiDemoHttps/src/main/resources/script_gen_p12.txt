@@ -49,7 +49,7 @@ openssl pkcs12 -export -out server.p12 -inkey serverapikey.pem -in serverapicrt-
 
 ---------------------------------------------------- Generate By CA ---------------------------------------------------------------
 
-openssl req -new -x509 -keyout demo-com-ca.key -out demo-com-ca.crt -days 9999 -subj '/CN=demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH' -passin pass:changeit -passout pass:changeit
+openssl req -new -x509 -newkey rsa:2048 -keyout demo-com-ca.key -out demo-com-ca.crt -days 9999 -subj '/CN=demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH' -passin pass:changeit -passout pass:changeit
 
 openssl req -x509 -nodes -newkey rsa:2048 -keyout springboot1-demo-com-key.pem -out springboot1-demo-com-pem.crt -days 3650 -subj '/CN=springboot1.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
 openssl req -x509 -nodes -newkey rsa:2048 -keyout springboot2-demo-com-key.pem -out springboot2-demo-com-pem.crt -days 3650 -subj '/CN=springboot2.demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH'
@@ -69,5 +69,13 @@ keytool -keystore server.p12 -alias springboot1.demo.com -import -file springboo
 keytool -keystore server.p12 -alias springboot2.demo.com -import -file springboot2-demo-com-pem-ca.crt -storepass changeit -keypass changeit
 
 keytool -keystore client.truststore.jks -storetype PKCS12 -alias CARoot -import -file demo-com-ca.crt -storepass changeit -keypass changeit
+
+----------------------------------------------------------- END -------------------------------------------------------------------
+
+----------------------------------------------------------- NOTE ------------------------------------------------------------------
+
+keytool -delete -alias springboot1.demo.com -keystore server.p12 -srcstoretype PKCS12 -storepass changeit
+keytool -delete -alias springboot2.demo.com -keystore server.p12 -srcstoretype PKCS12 -storepass changeit
+keytool -delete -alias caroot -keystore server.p12 -srcstoretype PKCS12 -storepass changeit
 
 ----------------------------------------------------------- END -------------------------------------------------------------------
