@@ -23,5 +23,5 @@ openssl req -new -key kongkey.pem -out request.csr
     A challenge password []:
     An optional company name []:
 
-#openssl x509 -signkey kongkey.pem -in request.csr -req -days 365 -out client.crt
-openssl x509 -req -CA ../../RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.crt -CAkey ../../RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.key -in request.csr -out client.crt -days 3650 -CAcreateserial -passin pass:changeit
+openssl x509 -signkey kongkey.pem -in request.csr -req -days 365 -out client.crt
+#openssl x509 -req -CA ../../RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.crt -CAkey ../../RestApi/RestApiDemoHttps/src/main/resources/demo-com-ca.key -in request.csr -out client.crt -days 3650 -CAcreateserial -passin pass:changeit
