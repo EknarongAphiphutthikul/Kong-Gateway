@@ -1,4 +1,4 @@
------------------------------------------------------ Generate by keytool --------------------------------------------------------
+----------------------------------------------------- Generate by keytool with out CA --------------------------------------------------------
 
 keytool -genkeypair -alias springboot.demo.com -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore server.p12 -validity 3650
 #keytool -genkeypair -alias springboot.demo.com -keyalg RSA -keysize 2048 -keystore mycert.jks -validity 3650
@@ -37,7 +37,7 @@ keytool -importkeystore -srckeystore mycert.jks -destkeystore server.p12 -destst
 ----------------------------------------------------------- END -------------------------------------------------------------------
 
 
----------------------------------------------------- Generate By OpenSSL ----------------------------------------------------------
+---------------------------------------------------- Generate By OpenSSL with out CA ----------------------------------------------------------
 
 #openssl req -x509 -newkey rsa:2048 -keyout serverapikeyencrypt.pem -out serverapicrt-pem.crt -days 3650
 #openssl pkey -in serverapikeyencrypt.pem -out serverapikey.pem
@@ -47,7 +47,7 @@ openssl pkcs12 -export -out server.p12 -inkey serverapikey.pem -in serverapicrt-
 
 ----------------------------------------------------------- END -------------------------------------------------------------------
 
----------------------------------------------------- Generate By CA ---------------------------------------------------------------
+---------------------------------------------------- Generate with CA ---------------------------------------------------------------
 
 openssl req -new -x509 -newkey rsa:2048 -keyout demo-com-ca.key -out demo-com-ca.crt -days 9999 -subj '/CN=demo.com/OU=Test/O=Test/L=Bangkok/ST=Bangkok/C=TH' -passin pass:changeit -passout pass:changeit
 
