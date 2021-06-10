@@ -1,5 +1,5 @@
 # Kong-Gateway
-![](https://github.com/EknarongAphiphutthikul/Kong-Gateway/KongDemo.jpg)
+![](https://github.com/EknarongAphiphutthikul/Kong-Gateway/blob/main/KongDemo.jpg)
 ## Kong
                 
 ----
